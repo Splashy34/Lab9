@@ -4,7 +4,7 @@ using namespace std;
 
 class Tree
 {
-public:
+private:
 	struct Node
 	{
 		int data;
@@ -12,15 +12,6 @@ public:
 		Node* right;
 		Node(int data) : data(data), left(nullptr), right(nullptr) {};
 	};
-	Tree();
-	~Tree();
-	void add(int data);
-	void remove(int data);
-	bool contains(int data);
-	int count();
-	void clear();
-	Node* getRoot();
-private:
 	int size;
 	Node* root;
 	void clearnode(Node* node)
@@ -51,6 +42,25 @@ private:
 			return node;
 		}
 	}
+	void fillArrayHelper(Node *node, int* array, int& index)
+	{
+		if (node == nullptr)
+		{
+			return;
+		}
+		fillArrayHelper(node->left, array, index);
+		array[index++] = node->data;
+		fillArrayHelper(node->right, array, index);
+	}
+public:
+	Tree();
+	~Tree();
+	void add(int data);
+	void remove(int data);
+	bool contains(int data);
+	int count();
+	void clear();
+	void fillArray(int* array, int& index);
 };
 Tree::Tree()
 {
@@ -155,7 +165,8 @@ void Tree::clear()
 	size = 0;
 }
 
-Tree:: Node* Tree::getRoot()
+void Tree::fillArray(int*array, int&index)
 {
-	return root;
+	fillArrayHelper(root, array, index);
 }
+
