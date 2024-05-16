@@ -22,8 +22,6 @@ public:
 	bool contains(int data);
 	int count();
 	int* ToArray();
-	void getTreeElements(Tree::Node* node, int* array, int& index);
-	
 };
 
 HashTree::HashTree()
@@ -79,21 +77,12 @@ int* HashTree::ToArray()
 	int index = 0;
 	for (int i = 0; i < size; ++i)
 	{
-		int treeSize = hashTable[i].count();
-		getTreeElements(hashTable[i].getRoot(), array, index);
+		hashTable[i].fillArray(array, index);
 	}
 	return array;
 }
-
-void HashTree::getTreeElements(Tree::Node* node, int* array, int& index)
+int main()
 {
-	if (node == nullptr) return;
-	getTreeElements(node->left, array, index);
-	array[index++] = node->data;
-	getTreeElements(node->right, array, index);
+    return 0;
 }
 
-int main() 
-{
-	return 0;
-}
