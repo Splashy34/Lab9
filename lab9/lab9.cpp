@@ -81,8 +81,73 @@ int* HashTree::ToArray()
 	}
 	return array;
 }
+
 int main()
 {
+    HashTree hashTree;
+    int choice;
+    int value;
+    do
+    {
+        cout << "1. Add an element." << endl;
+        cout << "2. Remove an element." << endl;
+        cout << "3. Check if an element is in the hash tree." << endl;
+        cout << "4. Size of the hash tree." << endl;
+        cout << "5. Clear the hash tree." << endl;
+        cout << "6. Show all elements." << endl;
+        cout << "0. Exit." << endl;
+        cin >> choice;
+        switch (choice)
+        {
+        case 1:
+            cout << "Enter the element you want to add: " << endl;
+            cin >> value;
+            hashTree.add(value);
+            break;
+        case 2:
+            cout << "Enter the element to remove: " << endl;
+            cin >> value;
+            hashTree.remove(value);
+            break;
+        case 3:
+            cout << "Enter the element to check: " << endl;
+            cin >> value;
+            if (hashTree.contains(value))
+            {
+                cout << "The element is in the hash tree." << endl;
+            }
+            else
+            {
+                cout << "The element is not in the hash tree." << endl;
+            }
+            break;
+        case 4:
+            cout << "The size of the hash tree is: " << hashTree.count() << endl;
+            break;
+        case 5:
+            hashTree.clear();
+            cout << "The hash tree is cleared." << endl;
+            break;
+        case 6:
+        {
+            int* elements = hashTree.ToArray();
+            int count = hashTree.count();
+            cout << "Elements in the hash tree: ";
+            for (int i = 0; i < count; ++i)
+            {
+                cout << elements[i] << " ";
+            }
+            cout << endl;
+            delete[] elements;
+            break;
+        }
+        case 0:
+            break;
+        default:
+            cout << "Unknown command. Try again." << endl;
+            break;
+        }
+    } while (choice != 0);
     return 0;
 }
 
